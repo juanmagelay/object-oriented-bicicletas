@@ -1,0 +1,61 @@
+import bicis.*
+import accesorios.*
+
+test "Bicicleta Juan" {
+	//Farolito Peso = 0.5
+	var canasto1 = new Canasto(volumen = 50) //Peso = 5
+	var morral1 = new Morral(largo = 3, tieneOjo = true) //Peso = 1.2
+	var bici1 = new Bicicletas(rodado = 26, largo = 119, marca = "Legnano", accesorios = [farolito, canasto1, morral1])
+	
+	assert.equals(bici1.altura(), 80)
+	assert.equals(bici1.velocidadCrucero(), 28)
+	assert.equals(bici1.carga(), 101) //0+100+1
+	assert.equals(bici1.peso(), 19.7) //13+0.5+5+1.2
+	assert.that(bici1.tieneLuz())
+	assert.equals(bici1.accesoriosLivianos(), 1)
+}
+
+test "Bicicleta 28" {
+	var bici2 = new Bicicletas(rodado = 28, largo = 150, marca = "Olmo", accesorios = [farolito])
+	
+	assert.equals(bici2.altura(), 85)
+	assert.equals(bici2.velocidadCrucero(), 34)
+	assert.equals(bici2.carga(), 0)
+	assert.equals(bici2.peso(), 14.5)
+	assert.that(bici2.tieneLuz())
+	assert.equals(bici2.accesoriosLivianos(), 1)
+}
+
+test "Bicicleta 26" {
+	var canasto2 = new Canasto(volumen = 8)
+	var morral2 = new Morral(largo = 21, tieneOjo = true)
+	var bici3 = new Bicicletas(rodado = 26, largo = 110, marca = "Legnano", accesorios = [farolito, canasto2, morral2])
+	
+	assert.equals(bici3.altura(), 80)
+	assert.equals(bici3.velocidadCrucero(), 28)
+	assert.equals(bici3.carga(), 23)
+	assert.equals(bici3.peso(), 15.5)
+	assert.that(bici3.tieneLuz())
+	assert.equals(bici3.accesoriosLivianos(), 2)
+}
+
+test "Bicicleta 20" {
+	var morral3 = new Morral(largo = 6, tieneOjo = false)
+	var bici4 = new Bicicletas(rodado = 20, largo = 90, marca = "Legnano", accesorios = [morral3])
+	
+	assert.equals(bici4.altura(), 65)
+	assert.equals(bici4.velocidadCrucero(), 22)
+	assert.equals(bici4.carga(), 2)
+	assert.equals(bici4.peso(), 11.2)
+	assert.notThat(bici4.tieneLuz())
+	assert.equals(bici4.accesoriosLivianos(), 0)
+}
+
+test "Companeras" {
+	var bici1 = new Bicicletas(rodado = 26, largo = 119, marca = "Legnano", accesorios = [])
+	var bici4 = new Bicicletas(rodado = 20, largo = 90, marca = "Legnano", accesorios = [])
+	var bici3 = new Bicicletas(rodado = 26, largo = 110, marca = "Legnano", accesorios = [])
+	
+	assert.notThat(bici1.esCompaneraDe(bici4))
+	assert.that(bici1.esCompaneraDe(bici3))
+}

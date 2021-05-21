@@ -1,0 +1,78 @@
+import bicis.*
+import accesorios.*
+import deposito.*
+
+
+test "Depositos Juan" {
+	var canasto2 = new Canasto(volumen = 8)
+	var morral2 = new Morral(largo = 21, tieneOjo = true)
+	var bici3 = new Bicicletas(rodado = 26, largo = 110, marca = "Legnano", accesorios = [farolito, canasto2, morral2])
+	var dep1 = new Deposito(bicis = [bici3])
+	
+	assert.equals(bici3.velocidadCrucero(), 28)
+	assert.equals(dep1.bicisRapidas().get(0).velocidadCrucero(), 28)
+	assert.equals(dep1.marcas(), ["Legnano"])
+	assert.that(dep1.esNocturno())
+	assert.notThat(dep1.puedeLlevarCarga(24))
+}
+
+test "Deposito Ejercicio" {
+	var bici2 = new Bicicletas(rodado = 28, largo = 150, marca = "Olmo", accesorios = [farolito])
+	
+	var canasto2 = new Canasto(volumen = 8)
+	var morral2 = new Morral(largo = 21, tieneOjo = true)
+	var bici3 = new Bicicletas(rodado = 26, largo = 110, marca = "Legnano", accesorios = [farolito, canasto2, morral2])
+
+	var morral3 = new Morral(largo = 6, tieneOjo = false)
+	var bici4 = new Bicicletas(rodado = 20, largo = 90, marca = "Legnano", accesorios = [morral3])
+	
+	var dep2 = new Deposito(bicis = [bici2, bici3, bici4])
+	
+	assert.equals(dep2.bicisRapidas().get(0).velocidadCrucero(), 34)
+	assert.equals(dep2.bicisRapidas().get(1).velocidadCrucero(), 28)
+	assert.equals(dep2.bicisRapidas().get(0).marca(), "Olmo")
+	assert.equals(dep2.bicisRapidas().get(1).marca(), "Legnano")
+	assert.notThat(dep2.esNocturno())
+	assert.that(dep2.puedeLlevarCarga(10))
+	assert.notThat(dep2.puedeLlevarCarga(50))
+}
+
+test "Marca mas rapida" {
+	var bici2 = new Bicicletas(rodado = 28, largo = 150, marca = "Olmo", accesorios = [farolito])
+	
+	var canasto2 = new Canasto(volumen = 8)
+	var morral2 = new Morral(largo = 21, tieneOjo = true)
+	var bici3 = new Bicicletas(rodado = 26, largo = 110, marca = "Legnano", accesorios = [farolito, canasto2, morral2])
+
+	var morral3 = new Morral(largo = 6, tieneOjo = false)
+	var bici4 = new Bicicletas(rodado = 20, largo = 90, marca = "Legnano", accesorios = [morral3])
+	
+	var dep2 = new Deposito(bicis = [bici2, bici3, bici4])
+	
+	assert.equals(dep2.marcaMasRapida(), "Olmo")	
+}
+
+test "Carga bicis largas y sin accesorios" {
+	var bici5 = new Bicicletas(rodado = 28, largo = 180, marca = "Olmo", accesorios = [])
+	
+	var canasto2 = new Canasto(volumen = 8) // Carga 16
+	var morral2 = new Morral(largo = 21, tieneOjo = true) // Carga 7
+	var bici6 = new Bicicletas(rodado = 26, largo = 190, marca = "Legnano", accesorios = [farolito, canasto2, morral2])
+
+	var morral3 = new Morral(largo = 6, tieneOjo = false) //Carga 2
+	var bici7 = new Bicicletas(rodado = 20, largo = 190, marca = "Legnano", accesorios = [morral3])
+	
+	var dep2 = new Deposito(bicis = [bici5, bici6, bici7])
+	
+	assert.equals(dep2.cargaBicisLargas(), 25)
+	assert.equals(dep2.sinAccesorios(), [bici5])	
+}
+
+test "Companeras" {
+	var bici1 = new Bicicletas(rodado = 26, largo = 119, marca = "Legnano", accesorios = [])
+	var bici4 = new Bicicletas(rodado = 20, largo = 90, marca = "Legnano", accesorios = [])
+	var bici3 = new Bicicletas(rodado = 26, largo = 110, marca = "Legnano", accesorios = [])
+	var dep3 = new Deposito(bicis = [bici1, bici4, bici3])
+	
+	assert.equals(dep3.bicisCompanerasDe(bici1), [bici3])
+}
