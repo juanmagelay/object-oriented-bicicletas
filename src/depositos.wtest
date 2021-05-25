@@ -81,5 +81,5 @@ test "Companeras" {
 	assert.equals(dep3.parDeBicis().size(), 2)
 	
 	dep3.parejasCompaneras()
-	assert.equals(dep3.parejasCompaneras().size(), 1)
+	assert.equals(dep3.parejas().size(), 1)
 }
