@@ -56,7 +56,7 @@ class Deposito {
 	
 	method seHizoLaLuz() {
 		//NO SE COMO ENCARARLO
-	}*/
+	}
 }
 
 
