@@ -73,9 +73,13 @@ test "Companeras" {
 	var bici4 = new Bicicletas(rodado = 20, largo = 90, marca = "Legnano", accesorios = [])
 	var bici3 = new Bicicletas(rodado = 26, largo = 110, marca = "Legnano", accesorios = [])
 	var dep3 = new Deposito(bicis = [bici1, bici4, bici3])
-	dep3.agregarPareja(bici1)
 	
 	assert.equals(dep3.bicisCompanerasDe(bici1), [bici3])
 	assert.that(dep3.hayCompanera())
+		
+	dep3.agregarPareja(bici1)
 	assert.equals(dep3.parDeBicis().size(), 2)
+	
+	dep3.parejasCompaneras()
+	assert.equals(dep3.parejasCompaneras().size(), 1)
 }

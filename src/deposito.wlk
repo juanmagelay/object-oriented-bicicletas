@@ -42,12 +42,12 @@ class Deposito {
 		return bicis.any( { b => self.bicisCompanerasDe(b).size() > 0 } )
 	}
 		
-	method parejasDeCompaneras() { //NO ME FUNCIONO
-		parDeBicis.addAll( { bicis.forEach( b => self.agregarAPareja(b) ) } )
+	method parejasCompaneras() { //NO ME FUNCIONO
+		parejas.add(parDeBicis)
 		return parejas
 	}
 	
-	method agregarPareja(unaBici) { //NO ME FUNCIONO
+	method agregarPareja(unaBici) {
 		if ( self.bicisCompanerasDe(unaBici).size() > 0 ) {
 			parDeBicis.add( { b => self.bicisCompanerasDe(b) } )
 			parDeBicis.add( { b } )
