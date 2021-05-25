@@ -3,6 +3,8 @@ import accesorios.*
 
 class Deposito {
 	var property bicis = []
+	var property parejas = []
+	var property parDeBicis = []
 	
 	method bicisRapidas() {
 		return bicis.filter( { b => b. velocidadCrucero() > 25 } )
@@ -39,15 +41,17 @@ class Deposito {
 	method hayCompanera() {
 		return bicis.any( { b => self.bicisCompanerasDe(b).size() > 0 } )
 	}
-	/*
-	method hayCompanera() { //NO ME FUNCIONO
-		return bicis.forEach( { b => self.bicisCompanerasDe(b) } )
-	}	
-	
+		
 	method parejasDeCompaneras() { //NO ME FUNCIONO
-		var parejas = []
-		parejas.add(bicis.forEach( { b => self.bicisCompanerasDe(b) } ))
+		parDeBicis.addAll( { bicis.forEach( b => self.agregarAPareja(b) ) } )
 		return parejas
+	}
+	
+	method agregarPareja(unaBici) { //NO ME FUNCIONO
+		if ( self.bicisCompanerasDe(unaBici).size() > 0 ) {
+			parDeBicis.add( { b => self.bicisCompanerasDe(b) } )
+			parDeBicis.add( { b } )
+		}		
 	}
 	
 	method seHizoLaLuz() {
