@@ -35,12 +35,14 @@ class Deposito {
 	method bicisCompanerasDe(unaBici) {
 		return bicis.filter( { b => b.esCompaneraDe(unaBici) and b != unaBici  } )
 	}
-	
-	method hayCompanera() { //NO ME FUNCIONO
-		var coleccionCompaneras = []
-		coleccionCompaneras.add(bicis.forEach( { b => self.bicisCompanerasDe(b) } ))
-		return coleccionCompaneras.size() > 0
+
+	method hayCompanera() {
+		return bicis.any( { b => self.bicisCompanerasDe(b).size() > 0 } )
 	}
+	/*
+	method hayCompanera() { //NO ME FUNCIONO
+		return bicis.forEach( { b => self.bicisCompanerasDe(b) } )
+	}	
 	
 	method parejasDeCompaneras() { //NO ME FUNCIONO
 		var parejas = []
@@ -50,7 +52,7 @@ class Deposito {
 	
 	method seHizoLaLuz() {
 		//NO SE COMO ENCARARLO
-	}
+	}*/
 }
 
 

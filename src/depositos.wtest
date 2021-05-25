@@ -75,4 +75,5 @@ test "Companeras" {
 	var dep3 = new Deposito(bicis = [bici1, bici4, bici3])
 	
 	assert.equals(dep3.bicisCompanerasDe(bici1), [bici3])
+	assert.that(dep3.hayCompanera())
 }
