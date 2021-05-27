@@ -42,7 +42,7 @@ class Deposito {
 		return bicis.any( { b => self.bicisCompanerasDe(b).size() > 0 } )
 	}
 		
-	method parejasCompaneras() { //NO ME FUNCIONO
+	method parejasCompaneras() { //FALTA TERMINAR, AGREGA 1 PAREJA PERO NO TODAS
 		parejas.add(parDeBicis)
 		return parejas
 	}
